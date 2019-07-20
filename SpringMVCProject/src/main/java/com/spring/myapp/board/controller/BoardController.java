@@ -1,5 +1,7 @@
 package com.spring.myapp.board.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,6 @@ import com.spring.myapp.board.model.BoardVO;
 import com.spring.myapp.board.service.IBoardService;
 import com.spring.myapp.commons.paging.PageCreator;
 import com.spring.myapp.commons.paging.SearchCriteria;
-
-// TESTING
 
 @Controller
 @RequestMapping("/board")

@@ -104,7 +104,7 @@
 					              
 					              <c:forEach var="idx" begin="${pageCreator.beginPage}" end="${pageCreator.endPage}">              
 					              	<li <c:out value="${pageCreator.criteria.page == idx ? 'class=active' : ''}"/>><a href="<c:url value='/board/list${pageCreator.makeSearchURI(idx)}'/>">${idx}</a></li>                                
-					              </c:forEach> 
+					              </c:forEach>    
 					              
 					              <c:if test="${pageCreator.next}">               
 					              	<li><a href="<c:url value='/board/list${pageCreator.makeSearchURI(pageCreator.endPage + 1)}' />">다음</a></li>

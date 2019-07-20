@@ -57,7 +57,7 @@
                             
                         </div>
                         <div class="box-footer">
-                            <button type="button" class="btn btn-primary list"><i class="fa fa-list"></i> 목록</button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-list"></i> 목록</button>
                             <div class="pull-right">
                                 <button type="reset" class="btn btn-warning"><i class="fa fa-reply"></i> 초기화</button>
                                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> 입력</button>
@@ -79,15 +79,6 @@
 <!-- ./wrapper -->
 
 <jsp:include page="../include/plugin-js.jsp" />
-
-<script type="text/javascript">
-$(document).ready(function() {
-
-	$("#list").on("click", function() {
-		self.location = "/board/list"
-	})
-})
-</script>
 
 </body>
 

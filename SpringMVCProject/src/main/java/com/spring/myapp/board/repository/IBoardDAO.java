@@ -3,6 +3,7 @@ package com.spring.myapp.board.repository;
 
 
 import java.util.List;
+import java.util.Map;
 
 import com.spring.myapp.board.model.BoardVO;
 import com.spring.myapp.commons.paging.Criteria;
