@@ -5,15 +5,13 @@
 <!DOCTYPE html>
 <html>
 
-
-
 <jsp:include page="../include/static-head.jsp" />
 
 <style>
 	#count-per-page input[type=button] {
 		padding: 0 12px;
 	}
-	
+
 </style>
 
 <body class="hold-transition skin-blue sidebar-mini layout-boxed">
@@ -46,14 +44,14 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">게시글 목록</h3>
-                        
+
                         <span id="count-per-page" style="float: right;">
                         	<i class="fa fa-list">목록 보기</i>
-	                        <input class="btn" type="button" value="10">  
-	                        <input class="btn" type="button" value="20">   
+	                        <input class="btn" type="button" value="10">
+	                        <input class="btn" type="button" value="20">
 	                        <input class="btn" type="button" value="30">
                         </span>
-                        
+
                     </div>
                     <div class="box-body">
                         <table class="table table-bordered">
@@ -65,7 +63,7 @@
                                 <th style="width: 150px">작성시간</th>
                                 <th style="width: 60px">조회</th>
                             </tr>
-                            
+
                             <%-- 게시물이 들어갈 공간 --%>
                             <c:if test="${articles.size() <= 0}">
 	                            <tr>
@@ -78,8 +76,8 @@
 	                                <td>${article.boardNo}</td>
 	                                <td>
 		                                <a href="<c:url value='/board/content${pageCreator.makeSearchURI(pageCreator.criteria.page)}&boardNo=${article.boardNo}'/>">
-		                                ${article.title} [${article.replyCnt}]</a>	
-		                                <c:if test="${article.newMark}">	                                
+		                                ${article.title} [${article.replyCnt}]</a>
+		                                <c:if test="${article.newMark}">
 		                                	<span class="label label-success">new</span>
 	                                	</c:if>
 	                                </td>
@@ -92,33 +90,33 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                    
+
+
 					<div class="box-footer">
-					      <div class="text-center"> 
+					      <div class="text-center">
 					          <ul class="pagination">
-					              
-					              <c:if test="${pageCreator.prev}">                                
-					              	<li><a href="<c:url value='/board/list${pageCreator.makeSearchURI(pageCreator.beginPage - 1)}' />">이전</a></li> 
-					              </c:if>                               
-					              
-					              <c:forEach var="idx" begin="${pageCreator.beginPage}" end="${pageCreator.endPage}">              
-					              	<li <c:out value="${pageCreator.criteria.page == idx ? 'class=active' : ''}"/>><a href="<c:url value='/board/list${pageCreator.makeSearchURI(idx)}'/>">${idx}</a></li>                                
-					              </c:forEach>    
-					              
-					              <c:if test="${pageCreator.next}">               
+
+					              <c:if test="${pageCreator.prev}">
+					              	<li><a href="<c:url value='/board/list${pageCreator.makeSearchURI(pageCreator.beginPage - 1)}' />">이전</a></li>
+					              </c:if>
+
+					              <c:forEach var="idx" begin="${pageCreator.beginPage}" end="${pageCreator.endPage}">
+					              	<li <c:out value="${pageCreator.criteria.page == idx ? 'class=active' : ''}"/>><a href="<c:url value='/board/list${pageCreator.makeSearchURI(idx)}'/>">${idx}</a></li>
+					              </c:forEach>
+
+					              <c:if test="${pageCreator.next}">
 					              	<li><a href="<c:url value='/board/list${pageCreator.makeSearchURI(pageCreator.endPage + 1)}' />">다음</a></li>
 					              </c:if>
-					         
+
 					         </ul>
 					      </div>
 					</div>
-					
-					
+
+
 					<div class="box-footer">
                     	<div class="col-sm-2"></div>
                         <div class="form-group col-sm-2">
-                            <select id="condition" class="form-control" name="condition">                            	
+                            <select id="condition" class="form-control" name="condition">
                                 <option value="title" <c:out value="${param.condition == 'title' ? 'selected' : ''}"/>>제목</option>
                                 <option value="content" <c:out value="${param.condition == 'content' ? 'selected' : ''}"/>>내용</option>
                                 <option value="writer" <c:out value="${param.condition == 'writer' ? 'selected' : ''}"/>>작성자</option>
@@ -141,8 +139,8 @@
                             </button>
                         </div>
                     </div>
-					            
-                    
+
+
                 </div>
             </div>
 
@@ -161,7 +159,7 @@
 
 <script type="text/javascript">
 	const result = "${message}";
-		
+
 	if(result === "regSuccess") {
 		alert("게시글 등록이 완료되었습니다.");
 	} else if(result === "modSuccess") {
@@ -169,53 +167,45 @@
 	} else if(result === "delSuccess") {
 		alert("게시글 삭제가 완료되었습니다.");
 	}
-	
+
 	//JQuery문의 시작
 	$(document).ready(function() {
-		
+
 		//글쓰기 버튼 클릭 이벤트
 		$("#writeBtn").on("click", function() {
 			self.location = "/mvc/board/write";
 		});
-		
+
 		//검색 버튼 클릭 이벤트
 		$("#searchBtn").on("click", function() {
 			self.location = "/mvc/board/list${pageCreator.makePageURI(1)}"
-							+ "&condition=" + $("select option:selected").val()  
+							+ "&condition=" + $("select option:selected").val()
 							+ "&keyword=" + $("#keywordInput").val();
 		});
-		
+
 		//엔터키 입력 이벤트
 		$("#keywordInput").keydown(function (key) {
-			 
+
 	        if(key.keyCode == 13){//키가 13이면 실행 (엔터는 13)
 	        	$("#searchBtn").click();
 	        }
-	 
+
 	    });
 
-		
+
 		//목록 개수 표현하기
 		$("#count-per-page input[type=button]").on("click", function() {
-						    	
+
 			//console.log($(this).val());
 			let count = $(this).val();
-			self.location = "list?page=${pageCreator.criteria.page}&countPerPage=" + count; 
+			self.location = "list?page=${pageCreator.criteria.page}&countPerPage=" + count;
 		});
-		
-		
+
+
 	});
-        
-     
+
+
 </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
